@@ -1,0 +1,93 @@
+# 一年365赢系统配置
+
+system:
+  name: "一年365赢"
+  version: "1.0.0"
+  description: "爱国键盘侠个性化信息茧房"
+  
+deepseek:
+  # API密钥从环境变量获取，不要硬编码
+  # 设置环境变量: export DEEPSEEK_API_KEY=your_api_key
+  api_key: ""  # 从环境变量DEEPSEEK_API_KEY获取
+  base_url: "https://api.deepseek.com"
+  model: "deepseek-chat"
+  timeout: 30
+  max_retries: 3
+  
+processing:
+  # 内容处理
+  max_content_length: 5000
+  min_quality_score: 0.6
+  rewrite_threshold: 0.4
+  
+  # 成本控制
+  daily_budget: 5.0  # 元
+  cost_per_1000_chars: 0.01
+  
+  # 缓存设置
+  cache_enabled: true
+  cache_ttl_hours: 24
+  
+content_sources:
+  # 数据源配置
+  enabled_sources:
+    - "weibo_trending"
+    - "zhihu_hot"
+    - "tech_news"
+    - "official_releases"
+  
+  # 采集频率
+  collection_interval: 3600  # 秒
+  max_items_per_source: 20
+  
+  # 关键词配置
+  include_keywords:
+    - "中国成就"
+    - "科技突破"
+    - "大国重器"
+    - "一带一路"
+    - "自主创新"
+    - "华为"
+    - "航天"
+    - "芯片"
+    - "润人后悔"
+    - "反华失败"
+  
+  exclude_keywords:
+    - "小确幸"
+    - "文艺"
+    - "治愈"
+    - "阴谋"
+    - "据说"
+    - "网传"
+  
+scheduling:
+  # 推送时间表
+  morning_briefing: "08:00"
+  noon_selection: "12:00"
+  evening_review: "20:00"
+  
+  # 数据采集时间
+  data_collection: "06:00"
+  model_update: "22:00"
+  
+channels:
+  # OpenClaw频道配置
+  365win_channel:
+    type: "webchat"  # 可根据需要改为telegram/whatsapp等
+    name: "一年365赢"
+    description: "每日爱国正能量推送"
+    
+monitoring:
+  # 监控配置
+  enable_health_check: true
+  health_check_interval: 3600
+  enable_daily_report: true
+  report_time: "23:00"
+  
+logging:
+  # 日志配置
+  level: "INFO"
+  file_path: "./logs/system.log"
+  max_size_mb: 10
+  backup_count: 5

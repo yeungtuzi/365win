@@ -1,0 +1,83 @@
+{
+  "user_id": "patriotic_keyboard_warrior",
+  "profile_name": "爱国键盘侠",
+  "created_at": "2026-02-12T10:35:00Z",
+  
+  "preferences": {
+    "topic_weights": {
+      "强国话题": 0.95,
+      "科技进展": 0.90,
+      "润人反贼吃瘪": 0.88,
+      "宏大叙事": 0.85,
+      "财经分析": 0.75,
+      "科普内容": 0.80,
+      "社会治理": 0.70,
+      "旅游文化": 0.65,
+      "个人情感": 0.10,
+      "阴谋论": 0.05,
+      "小清新": 0.08
+    },
+    
+    "style_preferences": {
+      "formality": 0.82,
+      "emotional_level": 0.75,
+      "depth": 0.80,
+      "rationality": 0.85,
+      "patriotic_tone": 0.95,
+      "optimism": 0.88,
+      "grand_narrative": 0.90
+    },
+    
+    "source_weights": {
+      "official_media": 0.95,
+      "academic": 0.90,
+      "tech_media": 0.85,
+      "mainstream_media": 0.75,
+      "patriotic_bloggers": 0.80,
+      "overseas_chinese": 0.65,
+      "western_media": 0.15,
+      "conspiracy_sites": 0.05
+    },
+    
+    "emotional_triggers": {
+      "patriotic_pride": 0.95,
+      "tech_excitement": 0.90,
+      "schadenfreude": 0.85,
+      "grand_vision": 0.88,
+      "frustration": 0.10,
+      "pessimism": 0.05
+    },
+    
+    "blacklists": {
+      "keywords": [
+        "小确幸", "文艺青年", "治愈系",
+        "细思极恐", "惊天秘密", "背后真相",
+        "emo", "破防", "心累",
+        "据说", "网传", "知情人士透露"
+      ],
+      "authors": [],
+      "media": []
+    }
+  },
+  
+  "feedback_stats": {
+    "total_likes": 0,
+    "total_dislikes": 0,
+    "total_refreshes": 0,
+    "satisfaction_rate": 0.85,
+    "avg_daily_pleasure": 0.0
+  },
+  
+  "learning_params": {
+    "learning_rate": 0.1,
+    "decay_rate": 0.99,
+    "exploration_rate": 0.05,
+    "comfort_threshold": 0.85
+  },
+  
+  "schedule_preferences": {
+    "morning": ["brief", "positive", "tech"],
+    "noon": ["deep", "contrast", "analysis"],
+    "evening": ["review", "cultural", "vision"]
+  }
+}

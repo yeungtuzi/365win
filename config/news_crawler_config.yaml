@@ -1,0 +1,188 @@
+# 新闻爬取专用配置
+
+system:
+  name: "新闻爬取系统"
+  version: "2.0.0"
+  description: "专注真实新闻爬取，去重，只翻译不风格化"
+  
+crawler:
+  # 数据源扩展
+  sources:
+    foreign:
+      - name: "Reuters"
+        url: "https://www.reuters.com/technology/"
+        type: "html"
+        language: "en"
+        
+      - name: "AP News"
+        url: "https://apnews.com/technology"
+        type: "html"
+        language: "en"
+        
+      - name: "BBC Technology"
+        url: "https://www.bbc.com/news/technology"
+        type: "html"
+        language: "en"
+        
+      - name: "TechCrunch"
+        url: "https://techcrunch.com/"
+        type: "rss"
+        language: "en"
+        
+      - name: "Wired"
+        url: "https://www.wired.com/feed/rss"
+        type: "rss"
+        language: "en"
+        
+      - name: "The Verge"
+        url: "https://www.theverge.com/rss/index.xml"
+        type: "rss"
+        language: "en"
+        
+      - name: "Hacker News"
+        url: "https://hacker-news.firebaseio.com/v0/topstories.json"
+        type: "api"
+        language: "en"
+        
+      - name: "Ars Technica"
+        url: "https://feeds.arstechnica.com/arstechnica/index"
+        type: "rss"
+        language: "en"
+        
+    chinese:
+      - name: "澎湃新闻"
+        url: "https://www.thepaper.cn/"
+        type: "html"
+        language: "zh"
+        
+      - name: "新华网科技"
+        url: "http://www.xinhuanet.com/tech/"
+        type: "html"
+        language: "zh"
+        
+      - name: "人民网科技"
+        url: "http://scitech.people.com.cn/"
+        type: "html"
+        language: "zh"
+        
+      - name: "央视网科技"
+        url: "http://news.cctv.com/tech/"
+        type: "html"
+        language: "zh"
+        
+      - name: "果壳网"
+        url: "https://www.guokr.com/scientific/"
+        type: "html"
+        language: "zh"
+        
+      - name: "虎嗅科技"
+        url: "https://www.huxiu.com/channel/104.html"
+        type: "html"
+        language: "zh"
+        
+      - name: "36氪"
+        url: "https://36kr.com/tech"
+        type: "html"
+        language: "zh"
+        
+      - name: "钛媒体"
+        url: "https://www.tmtpost.com/"
+        type: "html"
+        language: "zh"
+  
+  # 爬取设置
+  settings:
+    max_articles_per_source: 10
+    timeout_seconds: 15
+    user_agent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+    enable_proxy: false
+    
+  # 去重设置
+  deduplication:
+    enabled: true
+    methods:
+      - "title_similarity"  # 标题相似度
+      - "content_hash"      # 内容哈希
+      - "url_domain"        # 域名去重
+    similarity_threshold: 0.8  # 相似度阈值
+    
+processing:
+  # 处理设置
+  translation:
+    enabled: true
+    provider: "deepseek"
+    target_language: "zh"
+    style_rewriting: false  # 关闭风格重写
+    
+  # 摘要生成
+  summarization:
+    enabled: true
+    max_summary_length: 300
+    min_summary_length: 100
+    
+  # 内容过滤
+  filtering:
+    min_content_length: 100
+    max_content_length: 5000
+    require_full_text: true
+    
+output:
+  # 输出格式
+  briefing_format:
+    include_title: true
+    include_source: true
+    include_date: true
+    include_summary: true
+    include_url: true
+    include_translation_note: true
+    
+  # 简报结构
+  structure:
+    - "header"
+    - "foreign_news"
+    - "chinese_news"
+    - "summary"
+    
+  # 文件保存
+  save_to_file: true
+  file_format: "markdown"
+  directory: "data/news_briefings"
+  
+scheduling:
+  # 爬取频率
+  crawl_schedule:
+    - time: "02:00"
+      type: "full_crawl"
+      
+    - time: "08:00"
+      type: "quick_update"
+      
+    - time: "14:00"
+      type: "quick_update"
+      
+    - time: "20:00"
+      type: "quick_update"
+  
+  # 简报生成
+  briefing_schedule:
+    - time: "09:00"
+      type: "morning"
+      
+    - time: "13:00"
+      type: "noon"
+      
+    - time: "21:00"
+      type: "evening"
+
+quality:
+  # 质量要求
+  require_multiple_sources: true
+  min_sources_per_topic: 2
+  fact_checking: "basic"
+  credibility_threshold: 0.7
+  
+monitoring:
+  # 监控
+  track_success_rate: true
+  alert_on_failure: true
+  log_crawl_stats: true
